@@ -1,7 +1,0 @@
-# Running the simulation
-num_steps = 1000
-state_history = []
-ctrl = jnp.zeros(sys.act_size())
-for i in range(num_steps):
-    state = step_fn(sys, state, act=ctrl)
-    state_history.append(state)
