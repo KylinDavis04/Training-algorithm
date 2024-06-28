@@ -1,0 +1,15 @@
+# Brax Imports:
+from brax.mjx import pipeline
+from brax.io import mjcf, html
+
+# Load the MJCF model
+sys = mjcf.loads(xml_model)
+
+# Jitting the init and step functions for GPU acceleration
+init_fn = jax.jit(pipeline.init)
+step_fn = jax.jit(pipeline.step)
+
+# Initializing the state:
+state = init_fn(
+    sys=sys, q=sys.init_q, qd=jnp.zeros(sys.qd_size()),
+)
